@@ -6,24 +6,51 @@
         <div id="app">
             <h4>Hello Vue</h5>
             {{ message }}
+            <br/>
+                {{b}}
+            <br/>
+                {{c}}
         </div>
     </body>
     <script>
-        const { createApp, ref } = Vue
+        const { createApp, ref, onMounted } = Vue
+
         
+
+        let b = ref('bbbbbb');
+        let c = ref('cccccc');
+
         createApp({
             setup() {
                 const message = ref('Hello Vue 3!')
-                return { message }
+
+                const initialize = () => {
+                    let urlParams = new URLSearchParams(window.location.search);
+                    console.log(urlParams.has('a')); // true
+                    console.log(urlParams.get('a')); // "MyParam"
+                    b = urlParams.has('a');
+                    c = urlParams.get('a');
+                };
+
+                onMounted(() => initialize());
+
+                return { 
+                    message,
+                    b,
+                    c,
+                    initialize,
+                }
             },
         }).mount('#app')
 
-        var vm = new Vue({
-            created() {
-                let urlParams = new URLSearchParams(window.location.search);
-                console.log(urlParams.has('yourParam')); // true
-                console.log(urlParams.get('yourParam')); // "MyParam"
-            },
-        });
+        
+
+        // var vm = new Vue({
+        //     created() {
+        //         let urlParams = new URLSearchParams(window.location.search);
+        //         console.log(urlParams.has('yourParam')); // true
+        //         console.log(urlParams.get('yourParam')); // "MyParam"
+        //     },
+        // });
     </script>
 </html>
