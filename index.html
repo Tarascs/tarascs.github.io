@@ -13,12 +13,10 @@
         </div>
     </body>
     <script>
-        const { createApp, ref, onMounted } = Vue
+        const { createApp, ref, onMounted, reactive } = Vue
 
-        
-
-        let b = ref('bbbbbb');
-        let c = ref('cccccc');
+        var b = ref('bbbbbb');
+        var c = ref('cccccc');
 
         createApp({
             setup() {
@@ -28,8 +26,8 @@
                     let urlParams = new URLSearchParams(window.location.search);
                     console.log(urlParams.has('a')); // true
                     console.log(urlParams.get('a')); // "MyParam"
-                    b = urlParams.has('a');
-                    c = urlParams.get('a');
+                    b.value = urlParams.has('a');
+                    c.value = urlParams.get('a');
                 };
 
                 onMounted(() => initialize());
