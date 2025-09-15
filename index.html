@@ -1,8 +1,29 @@
 <html>
     <head>
-        <h4>Hello Vue</h5>
+        <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
     </head>
     <body>
-
+        <div id="app">
+            <h4>Hello Vue</h5>
+            {{ message }}
+        </div>
     </body>
+    <script>
+        const { createApp, ref } = Vue
+        
+        createApp({
+            setup() {
+                const message = ref('Hello Vue 3!')
+                return { message }
+            },
+        }).mount('#app')
+
+        var vm = new Vue({
+            created() {
+                let urlParams = new URLSearchParams(window.location.search);
+                console.log(urlParams.has('yourParam')); // true
+                console.log(urlParams.get('yourParam')); // "MyParam"
+            },
+        });
+    </script>
 </html>
