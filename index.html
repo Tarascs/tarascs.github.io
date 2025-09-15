@@ -7,9 +7,13 @@
             <h4>Hello Vue</h5>
             {{ message }}
             <br/>
-                {{b}}
+            {{b}}
             <br/>
-                {{c}}
+            {{c}}
+            <br/>
+            {{d}}
+            <br/>
+            {{e}}
         </div>
     </body>
     <script>
@@ -17,6 +21,8 @@
 
         var b = ref('bbbbbb');
         var c = ref('cccccc');
+        var d = ref('dddddd');
+        var e = ref('eeeeee');
 
         createApp({
             setup() {
@@ -24,10 +30,12 @@
 
                 const initialize = () => {
                     let urlParams = new URLSearchParams(window.location.search);
-                    console.log(urlParams.has('a')); // true
-                    console.log(urlParams.get('a')); // "MyParam"
-                    b.value = urlParams.has('a');
-                    c.value = urlParams.get('a');
+                    console.log(urlParams.get('pcEnvironment'));
+                    console.log(urlParams.get('pcConversationId'));
+                    b.value = urlParams.has('pcEnvironment');
+                    c.value = urlParams.get('pcEnvironment');
+                    d.value = urlParams.has('pcConversationId');
+                    e.value = urlParams.get('pcConversationId');
                 };
 
                 onMounted(() => initialize());
@@ -36,12 +44,12 @@
                     message,
                     b,
                     c,
+                    d,
+                    e,
                     initialize,
                 }
             },
         }).mount('#app')
-
-        
 
         // var vm = new Vue({
         //     created() {
